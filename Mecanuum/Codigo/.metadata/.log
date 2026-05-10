@@ -1,0 +1,18 @@
+!SESSION 2026-05-08 15:07:39.100 -----------------------------------------------
+eclipse.buildId=Version 1.17.0
+java.version=21.0.3
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2026-05-08 15:09:15.511
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2026-05-08 15:09:15.511
+!MESSAGE Log4j2 initialized with config file C:\Users\abrah\Documents\GitHub\Curso_Robotica_A26\Mecanuum\Codigo\.metadata\.log4j2.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2026-05-08 15:09:19.336
+!MESSAGE Started RMI Server, listening on port 41337
+
+!ENTRY org.eclipse.cdt.core 1 0 2026-05-08 16:35:28.748
+!MESSAGE Indexed 'Puente_H_Control' (19 sources, 81 headers) in 4.15 sec: 4,310 declarations; 18,165 references; 0 unresolved inclusions; 1 syntax errors; 2 unresolved names (0.0089%)
