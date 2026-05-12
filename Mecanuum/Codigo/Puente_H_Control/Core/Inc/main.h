@@ -59,10 +59,20 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define LED_Blue_Pin GPIO_PIN_13
+#define LED_Blue_GPIO_Port GPIOC
 #define M1_AIN1_Pin GPIO_PIN_1
 #define M1_AIN1_GPIO_Port GPIOA
 #define M1_AIN2_Pin GPIO_PIN_2
 #define M1_AIN2_GPIO_Port GPIOA
+#define M1_PWMA_Pin GPIO_PIN_0
+#define M1_PWMA_GPIO_Port GPIOA
+#define M2_PWMB_Pin GPIO_PIN_3
+#define M2_PWMB_GPIO_Port GPIOA
+#define M2_BIN1_Pin GPIO_PIN_4
+#define M2_BIN1_GPIO_Port GPIOA
+#define M2_BIN2_Pin GPIO_PIN_5
+#define M2_BIN2_GPIO_Port GPIOA
 #define M1_STDBY_Pin GPIO_PIN_6
 #define M1_STDBY_GPIO_Port GPIOA
 

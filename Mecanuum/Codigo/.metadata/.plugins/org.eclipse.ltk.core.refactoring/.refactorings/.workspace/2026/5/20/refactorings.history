@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;Puente_H_Control&apos; to &apos;1_Puente_H_Control_REF&apos;" description="Rename resource &apos;Puente_H_Control&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="/Puente_H_Control" name="1_Puente_H_Control_REF" stamp="1778537465326" updateReferences="true"/>
+</session>

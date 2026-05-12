@@ -1,0 +1,22 @@
+15:23:11 **** Incremental Build of configuration Debug for project Puente_H_Control ****
+make -j32 all 
+arm-none-eabi-gcc -o "Puente_H_Control.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\abrah\Documents\GitHub\Curso_Robotica_A26\Mecanuum\Codigo\Puente_H_Control\STM32F411CEUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Puente_H_Control.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Puente_H_Control.elf
+ 
+arm-none-eabi-size  Puente_H_Control.elf 
+arm-none-eabi-objdump -h -S Puente_H_Control.elf  > "Puente_H_Control.list"
+arm-none-eabi-objcopy  -O ihex Puente_H_Control.elf  "Puente_H_Control.hex"
+   text	   data	    bss	    dec	    hex	filename
+   8580	     12	   1644	  10236	   27fc	Puente_H_Control.elf
+arm-none-eabi-objcopy  -O binary Puente_H_Control.elf  "Puente_H_Control.bin"
+Finished building: default.size.stdout
+ 
+Finished building: Puente_H_Control.list
+ 
+Finished building: Puente_H_Control.hex
+Finished building: Puente_H_Control.bin
+ 
+ 
+
+15:23:11 Build Finished. 0 errors, 0 warnings. (took 707ms)
+

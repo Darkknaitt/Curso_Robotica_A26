@@ -43,7 +43,9 @@
 TIM_HandleTypeDef htim2;
 
 /* USER CODE BEGIN PV */
-
+#define PWM_MAX 499  // ARR value
+#define PWM_FULL 499
+#define PWM_HALF 250
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -89,21 +91,52 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_TIM2_Init();
-  HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
-
+  
+  /* USER CODE BEGIN Init2 */
+  // se inicializan ambos canales PWM del Timer 2
+  HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);  // PA0 - Motor M1
+  HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_2);  // PA3 - Motor M2
+  
+  // se habilita el driver (Standby enable PA6)
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, GPIO_PIN_SET);
+  /* USER CODE END Init2 */
   /* USER CODE BEGIN 2 */
-
+  // Led para indicar qu efunciona
+  HAL_GPIO_TogglePin(LED_Blue_GPIO_Port, LED_Blue_Pin);
+  HAL_Delay(200);
+  
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_SET);   // PA1 = HIGH (test GPIO)
+  HAL_Delay(500);
+  
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  __HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, 250);
-    /* USER CODE END WHILE */
-
-    /* USER CODE BEGIN 3 */
+    // AIN1 = HIGH
+    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_SET);   // Direction control
+    
+    // Setaround 100%
+    __HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, 400); //
+    __HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_2, 400);
+    
+    HAL_GPIO_TogglePin(LED_Blue_GPIO_Port, LED_Blue_Pin);
+    HAL_Delay(2000);
+    
+    /* TEST 2: Motor reverse */
+    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_RESET);  // Direction control
+    
+    __HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, 400);
+    __HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_2, 400);
+    
+    HAL_GPIO_TogglePin(LED_Blue_GPIO_Port, LED_Blue_Pin);
+    HAL_Delay(2000);
   }
+  /* USER CODE END WHILE */
+
+  /* USER CODE BEGIN 3 */
+
   /* USER CODE END 3 */
 }
 
@@ -182,6 +215,8 @@ static void MX_TIM2_Init(void)
   {
     Error_Handler();
   }
+  
+  /* Configure Channel 1 (PA0 - Motor M1) */
   sConfigOC.OCMode = TIM_OCMODE_PWM1;
   sConfigOC.Pulse = 0;
   sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
@@ -190,6 +225,17 @@ static void MX_TIM2_Init(void)
   {
     Error_Handler();
   }
+  
+  /* Configure Channel 2 (PA3 - Motor M2) */
+  sConfigOC.OCMode = TIM_OCMODE_PWM1;
+  sConfigOC.Pulse = 0;
+  sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
+  sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
+  if (HAL_TIM_PWM_ConfigChannel(&htim2, &sConfigOC, TIM_CHANNEL_2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  
   /* USER CODE BEGIN TIM2_Init 2 */
 
   /* USER CODE END TIM2_Init 2 */
@@ -209,13 +255,24 @@ static void MX_GPIO_Init(void)
 /* USER CODE END MX_GPIO_Init_1 */
 
   /* GPIO Ports Clock Enable */
+  __HAL_RCC_GPIOC_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, M1_AIN1_Pin|M1_AIN2_Pin|M1_STDBY_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(LED_Blue_GPIO_Port, LED_Blue_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pins : M1_AIN1_Pin M1_AIN2_Pin M1_STDBY_Pin */
-  GPIO_InitStruct.Pin = M1_AIN1_Pin|M1_AIN2_Pin|M1_STDBY_Pin;
+  /*Configure GPIO pin Output Level - Control signals initialized to RESET */
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin : LED_Blue_Pin */
+  GPIO_InitStruct.Pin = LED_Blue_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(LED_Blue_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pins for Motor Control: AIN1(PA1), AIN2(PA2), BIN1(PA4), BIN2(PA5), STBY(PA6) */
+  GPIO_InitStruct.Pin = GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;

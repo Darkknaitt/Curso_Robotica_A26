@@ -16,3 +16,24 @@ Command-line arguments:  -os win32 -ws win32 -arch x86_64
 
 !ENTRY org.eclipse.cdt.core 1 0 2026-05-08 16:35:28.748
 !MESSAGE Indexed 'Puente_H_Control' (19 sources, 81 headers) in 4.15 sec: 4,310 declarations; 18,165 references; 0 unresolved inclusions; 1 syntax errors; 2 unresolved names (0.0089%)
+!SESSION 2026-05-11 15:08:29.562 -----------------------------------------------
+eclipse.buildId=Version 1.17.0
+java.version=21.0.3
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2026-05-11 15:09:04.566
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2026-05-11 15:09:04.570
+!MESSAGE Log4j2 initialized with config file C:\Users\abrah\Documents\GitHub\Curso_Robotica_A26\Mecanuum\Codigo\.metadata\.log4j2.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2026-05-11 15:09:14.815
+!MESSAGE Started RMI Server, listening on port 41337
+
+!ENTRY org.eclipse.cdt.core 1 0 2026-05-11 16:11:06.039
+!MESSAGE Indexed '1_Puente_H_Control_REF' (0 sources, 0 headers) in 0 sec: 0 declarations; 0 references; 0 unresolved inclusions; 0 syntax errors; 0 unresolved names (0%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2026-05-11 17:31:18.569
+!MESSAGE Indexed '1_Practica_Guiada' (19 sources, 81 headers) in 2.22 sec: 4,310 declarations; 18,165 references; 0 unresolved inclusions; 1 syntax errors; 2 unresolved names (0.0089%)
